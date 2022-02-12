@@ -4,16 +4,7 @@ import threading
 from main import Socket
 
 
-class ClientVerifier(type):
-    def __init__(self, clsname, base, clsdict):
-        type.__init__(self, clsname, base, clsdict)
-
-
-class BaseClient(metaclass=ClientVerifier):
-    pass
-
-
-class Client(BaseClient, Socket):
+class Client(Socket):
     def __init__(self):
         super(Client, self).__init__()
 
@@ -55,4 +46,3 @@ class Client(BaseClient, Socket):
 if __name__ == '__main__':
     client = Client()
     client.set_connect()
-    client.insert_bd('Nick', 'Perov', '123454321')

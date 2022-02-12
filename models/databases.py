@@ -47,6 +47,3 @@ class ContactList(Base):
 
 def create_db():
     Base.metadata.create_all(engine)
-
-
-create_db()

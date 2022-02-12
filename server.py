@@ -1,19 +1,18 @@
+import socket
 import threading
 
 from main import Socket
-from models.databases import User, Session
 
 
 class Server(Socket):
     def __init__(self):
         super(Server, self).__init__()
         self.clients = []
-        self.session = Session()
 
     def set_connect(self):
         self.bind((self.address, self.port))
+        self.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
         self.listen(5)
-        self.start_server()
 
     def send_data(self, data, sock):
         for client in self.clients:
@@ -44,3 +43,4 @@ class Server(Socket):
 if __name__ == '__main__':
     server = Server()
     server.set_connect()
+    server.start_server()
